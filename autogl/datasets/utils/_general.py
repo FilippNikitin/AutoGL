@@ -334,7 +334,7 @@ def graph_get_split(
     if mask.lower() not in ("train", "val", "test"):
         raise ValueError
     elif mask.lower() == "train":
-        optional_dataset_split = dataset.train_split
+        optional_dataset_split = dataset[dataset.train_index]
         if optional_dataset_split is None:
             raise ValueError(f"Provided dataset do NOT have {mask} split")
         else:
@@ -342,7 +342,7 @@ def graph_get_split(
                 optional_dataset_split, train_index=list(range(len(optional_dataset_split)))
             )
     elif mask.lower() == "val":
-        optional_dataset_split = dataset.val_split
+        optional_dataset_split = dataset[dataset.val_index]
         if optional_dataset_split is None:
             raise ValueError(f"Provided dataset do NOT have {mask} split")
         else:
@@ -350,7 +350,7 @@ def graph_get_split(
                 optional_dataset_split, val_index=list(range(len(optional_dataset_split)))
             )
     elif mask.lower() == "test":
-        optional_dataset_split = dataset.test_split
+        optional_dataset_split = dataset[dataset.test_index]
         if optional_dataset_split is None:
             raise ValueError(f"Provided dataset do NOT have {mask} split")
         else:
